@@ -24,7 +24,14 @@ Hello Closures!
 Hello Closures!
 Hello Closures!
 ```
-
+```swift
+func applyKTimes(_ k: Int, _ closure:() -> ()) {
+for _ in 1...k{
+closure()
+}
+}
+applyKTimes(3, {print("Hello closure!")})
+```
 
 ## Question 2
 
@@ -36,7 +43,11 @@ Example:
 Input: `let numbers = [1, 2, 3, 4, 6, 8, 9, 3, 12, 11]`
 
 Expected values: `multiples = [3, 6, 9, 3, 12]`
-
+```
+let numbers = [1, 2, 3, 4, 6, 8, 9, 3, 12, 11]
+var mulitples = numbers.filter {  $0 % 3 == 0}
+print(mulitples)
+```
 
 ## Question 3
 
@@ -46,6 +57,19 @@ Example:
 Input: `let numbers = [4, 7, 1, 9, 6, 5, 6, 9]`
 
 Output: `9`
+```swift
+let numbers = [4, 7, 9, 9, 6, 5, 6, 9]
+var biggestNum = numbers.reduce(0,{
+if $0>$1{
+return $0
+}else {
+return $1
+}
+})
+print(biggestNum)
+
+
+```
 
 
 ## Question 4
@@ -56,7 +80,12 @@ Example:
 Input: `let strings = ["We", "Heart", "Swift"]`
 
 Output: `"We Heart Swift"`
+```swift
+let strings = ["We", "Heart", "Swift"]
+let strAdded = strings.reduce("", { x, y in x + " " + y })
+print(strAdded)
 
+```
 
 ## Question 5
 
@@ -67,7 +96,21 @@ a. Use `sortedBy` to sort `cities` in alphabetical order.
 b. Use `sortedBy` to sort `cities` alphabetical order of the second character of the city name.
 
 c. Use `sortedBy` to sort `cities` in order of the length of the city name.
+```
+let cities = ["Shanghai", "Beijing", "Delhi", "Lagos", "Tianjin", "Karachi", "Karachi", "Tokyo", "Guangzhou", "Mumbai", "Moscow", "São Paulo"]
 
+var sortedAlphabetical = cities.sorted{(a, b) -> Bool in
+return a < b}
+
+var sortedSecond = cities.sorted{(a, b)-> Bool in
+let second = a.index(after: a.startIndex)
+return a[second] < b[second]}
+print(sortedSecond)
+
+var lengthString = cities.sorted {(a,b)-> Bool in
+return a.count>b.count}
+print(lengthString)
+```
 
 ## Question 6
 
@@ -76,7 +119,18 @@ c. Use `sortedBy` to sort `cities` in order of the length of the city name.
 a. Use `sortedBy` to sort `citiesWithPopulation` in ascending order of population.
 
 b. Use `sortedBy` to sort `citiesWithPopulation` in reverse alphabetical order of the last character in the city name.
+```
+let citiesWithPopulation: [(String, Int)] = [("Shanghai", 24256800), ("Beijing", 21516000), ("Delhi", 16787941), ("Lagos", 16060303), ("Tianjin", 15200000), ("Karachi", 14910352), ("Karachi", 14160467), ("Tokyo", 13513734), ("Guangzhou", 13080500), ("Mumbai", 12442373), ("Moscow", 12380664), ("São Paulo", 12038175)]
 
+var ascendingPop = citiesWithPopulation.sorted { (a,b) -> Bool in
+return a.1 > b.1
+}
+print(ascendingPop)
+
+var ascendingReverse = citiesWithPopulation.sorted { (a,b) -> Bool in
+return a.0.last! > b.0.last! }
+print(ascendingReverse)
+```
 
 ## Question 7
 
@@ -107,17 +161,58 @@ Find the sum of the squares of all the odd numbers from `numbers` and then print
 `var numbers = [1, 2, 3, 4, 5, 6]`
 
 a. Write code that removes all the odd numbers from the array.
-
+```swift
+var numbers = [1, 2, 3, 4, 5, 6]
+func removeOdd (arr: [Int]) -> [Int]{
+var newArray = [Int]()
+for i in arr {
+if i % 2 != 0 {
+newArray += [i]
+}
+}
+return newArray
+}
+var newArry = removeOdd(arr: numbers)
+```
 b. Write code that squares all the numbers in the array.
+```swift
+func squareNum (arr: [Int])-> [Int] {
+var anotherArray = [Int]()
+for i in arr {
+anotherArray.append(i * i)
+}
+return anotherArray
+}
+var anotherArray = squareNum(arr: newArry)
+```
 
 c. Write code that finds the sum of the array.
+```swift
+var sum = 0
+for i in arr {
+sum += i
+}
+return sum
+}
+print(sumNum(arr: anotherArray))
+```
 
 d. Now use `map`, `filter` and `reduce` to solve this problem.
-
+```
+var numbers = [1, 2, 3, 4, 5, 6]
+var anotherNum = numbers.filter{ (nums) -> Bool in return nums % 2 != 0 }.map{ (nums) -> Int in return nums * nums}.reduce(0, {a, b in a + b})
+print(anotherNum)
+```
 Example:
 Input: `var numbers = [1, 2, 3, 4, 5, 6]`
 
 Output: `35 // 1 + 9 + 25 -> 35`
+
+
+
+
+func sumNum(arr: [Int])-> Int {
+
 
 
 ## Question 9
@@ -203,11 +298,24 @@ let mySortedArray = myArray.sort(ascendingOrder)
 let ascendingOrder =
 ```
 
+
 b) Sort `myArray` in descending order by defining the constant `descendingOrder` below.
 
 ```swift
 let mySecondSortedArray = myArray.sort(descendingOrder)
 let descendingOrder =
+```
+```swift
+let ascendingOrder = { (a: Int, b: Int) -> Bool in return a < b }
+myArray.sort(by: ascendingOrder)
+print(myArray)
+
+
+```
+```swift
+let descendingOrder = { (a: Int, b: Int) -> Bool in return a > b }
+myArray.sort(by: descendingOrder)
+print(myArray)
 ```
 
 
@@ -216,7 +324,16 @@ let descendingOrder =
 `let arrayOfArrays = [[3,65,2,4],[25,3,1,6],[245,2,3,5,74]]`
 
 a) Sort `arrayOfArrays` in ascending order by the **3rd element** in each array. You can assume each array will have at least 3 elements.
+```swift
+let arrayOfArrays = [[3,65,2,4],[25,3,1,6],[245,2,3,5,74]]
 
+let ascenTird = { (a: [Int], b: [Int]) -> Bool in
+return a[2] < b[2]
+}
+let sortedArray = arrayOfArrays.sorted(by: ascenTird)
+print(sortedArray)
+
+```
 b) Sort `arrayOfArrays` in ascending order by the 3rd element in each array. Don't assume each array will have at least 3 elements. Put all arrays that have less than 3 elements at the end in any order.
 
 
@@ -279,6 +396,20 @@ Sort the array of tuples by last name. Print the sorted array using string inter
 Bach, Johann S.
 Des Prez, Josquin
 ...etc
+```
+```swift
+let firstAndLastTuples = [("Johann S.", "Bach"),
+("Claudio", "Monteverdi"),
+("Duke", "Ellington"),
+("W. A.", "Mozart"),
+("Nicolai","Rimsky-Korsakov"),
+("Scott","Joplin"),
+("Josquin","Des Prez")]
+
+var lastFirst = firstAndLastTuples.sorted(by: { (a,b) -> Bool  in
+return a.1 < b.1
+})
+print(lastFirst)
 ```
 
 ## Question 16
