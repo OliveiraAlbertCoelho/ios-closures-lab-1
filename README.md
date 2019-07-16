@@ -43,7 +43,7 @@ Example:
 Input: `let numbers = [1, 2, 3, 4, 6, 8, 9, 3, 12, 11]`
 
 Expected values: `multiples = [3, 6, 9, 3, 12]`
-```
+```swift
 let numbers = [1, 2, 3, 4, 6, 8, 9, 3, 12, 11]
 var mulitples = numbers.filter {  $0 % 3 == 0}
 print(mulitples)
@@ -96,7 +96,7 @@ a. Use `sortedBy` to sort `cities` in alphabetical order.
 b. Use `sortedBy` to sort `cities` alphabetical order of the second character of the city name.
 
 c. Use `sortedBy` to sort `cities` in order of the length of the city name.
-```
+```swift
 let cities = ["Shanghai", "Beijing", "Delhi", "Lagos", "Tianjin", "Karachi", "Karachi", "Tokyo", "Guangzhou", "Mumbai", "Moscow", "São Paulo"]
 
 var sortedAlphabetical = cities.sorted{(a, b) -> Bool in
@@ -119,7 +119,7 @@ print(lengthString)
 a. Use `sortedBy` to sort `citiesWithPopulation` in ascending order of population.
 
 b. Use `sortedBy` to sort `citiesWithPopulation` in reverse alphabetical order of the last character in the city name.
-```
+```swifr
 let citiesWithPopulation: [(String, Int)] = [("Shanghai", 24256800), ("Beijing", 21516000), ("Delhi", 16787941), ("Lagos", 16060303), ("Tianjin", 15200000), ("Karachi", 14910352), ("Karachi", 14160467), ("Tokyo", 13513734), ("Guangzhou", 13080500), ("Mumbai", 12442373), ("Moscow", 12380664), ("São Paulo", 12038175)]
 
 var ascendingPop = citiesWithPopulation.sorted { (a,b) -> Bool in
@@ -198,7 +198,7 @@ print(sumNum(arr: anotherArray))
 ```
 
 d. Now use `map`, `filter` and `reduce` to solve this problem.
-```
+```swift
 var numbers = [1, 2, 3, 4, 5, 6]
 var anotherNum = numbers.filter{ (nums) -> Bool in return nums % 2 != 0 }.map{ (nums) -> Int in return nums * nums}.reduce(0, {a, b in a + b})
 print(anotherNum)
